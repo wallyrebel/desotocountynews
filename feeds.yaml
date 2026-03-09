@@ -1,0 +1,121 @@
+# =============================================================================
+# RSS Feeds Configuration for DeSoto County News
+# =============================================================================
+
+feeds:
+  # --- DeSoto County Local Feeds ---
+  - name: "DeSoto County Feed 1"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhUCBEOX3Ry.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 2"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhUAy4821K7.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 3"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhD0bCMwAMs.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 4"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCxD2CK9GF.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 5"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCvFAPq3EK.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 6"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCtnBN10Z8.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 7"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCsg77bAmw.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 8"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCrnFg5EPi.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 9"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCql2CK9GE.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 10"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCpw79HF3y.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 11"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCnzALf57y.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 12"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCmJ0IyGJO.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  - name: "DeSoto County Feed 13"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vhClV2mSEJm.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
+
+  # =============================================================================
+  # Mississippi Statewide Source
+  # =============================================================================
+
+  - name: "Mississippi Today"
+    url: "https://mississippitoday.org/feed/"
+    default_category: "Mississippi News"
+    default_tags:
+      - "Mississippi"
+      - "Statewide"
+    max_per_run: 3
