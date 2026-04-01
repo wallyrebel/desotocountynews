@@ -108,14 +108,3 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  # =============================================================================
-  # Mississippi Statewide Source
-  # =============================================================================
-
-  - name: "Mississippi Today"
-    url: "https://mississippitoday.org/feed/"
-    default_category: "Mississippi News"
-    default_tags:
-      - "Mississippi"
-      - "Statewide"
-    max_per_run: 3
