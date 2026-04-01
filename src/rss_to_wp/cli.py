@@ -30,6 +30,7 @@ from rss_to_wp.feeds import (
 )
 from rss_to_wp.images import PexelsClient, download_image, find_fallback_image, find_rss_image
 from rss_to_wp.rewriter import OpenAIRewriter
+from rss_to_wp.republish import build_republish_body, get_entry_author
 from rss_to_wp.storage import DedupeStore
 from rss_to_wp.utils import (
     build_summary_email,
@@ -720,33 +721,58 @@ def process_entry(
         )
         return {"_status": "skipped", "_skip_reason": quality_reason}
 
-    # Rewrite with OpenAI
-    rewritten = rewriter.rewrite(
-        content=content,
-        original_title=title,
-        use_original_title=feed_config.use_original_title,
-    )
+    # --- Republish pathway (CC BY-ND: no rewriting allowed) ---
+    if feed_config.republish:
+        author = get_entry_author(entry)
+        logger.info(
+            "republishing_entry",
+            title=title[:50],
+            author=author,
+            source=feed_config.name,
+        )
+        body = build_republish_body(
+            content=content,
+            author=author,
+            original_url=link or "",
+        )
+        rewritten = {
+            "headline": title,
+            "body": body,
+            "excerpt": "",
+        }
+    else:
+        # --- Standard AI rewrite pathway ---
+        rewritten = rewriter.rewrite(
+            content=content,
+            original_title=title,
+            use_original_title=feed_config.use_original_title,
+        )
 
-    if not rewritten:
-        logger.error("rewrite_failed", title=title[:50])
-        return None
+        if not rewritten:
+            logger.error("rewrite_failed", title=title[:50])
+            return None
 
     # Find image
     featured_media_id = None
     image_result = None
 
-    # Try RSS image first
-    image_url = find_rss_image(entry, base_url=link or "")
-    image_alt = ""
+    if feed_config.republish:
+        # Photos are excluded from CC license; skip RSS images, use stock
+        image_url = None
+        image_alt = ""
+    else:
+        # Try RSS image first
+        image_url = find_rss_image(entry, base_url=link or "")
+        image_alt = ""
 
-    if image_url:
-        logger.info("using_rss_image", url=image_url)
-        image_result = download_image(image_url)
-        if image_result:
-            image_bytes, filename, _ = image_result
-            image_alt = title[:100]  # Use title as alt for RSS images
-        else:
-            image_url = None
+        if image_url:
+            logger.info("using_rss_image", url=image_url)
+            image_result = download_image(image_url)
+            if image_result:
+                image_bytes, filename, _ = image_result
+                image_alt = title[:100]  # Use title as alt for RSS images
+            else:
+                image_url = None
 
     # Fallback to stock photos
     if not image_url:
