@@ -121,3 +121,11 @@ feeds:
     max_per_run: 3
     republish: true
     use_original_title: true
+
+  - name: "Southaven Police Department"
+    url: "https://fetchrss.com/feed/1vcaujD2G3c21vcd177VRDEB.rss"
+    default_category: "DeSoto County News"
+    default_tags:
+      - "DeSoto County"
+      - "Local"
+    max_per_run: 3
