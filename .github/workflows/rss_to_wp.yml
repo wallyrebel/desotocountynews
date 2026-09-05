@@ -16,6 +16,14 @@ on:
         options:
           - 'true'
           - 'false'
+      smoke_test:
+        description: 'Test models on real RSS samples without publishing'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
       single_feed:
         description: 'Process only a specific feed (by name)'
         required: false
@@ -68,6 +76,7 @@ jobs:
       - name: Run RSS to WordPress
         env:
           DRY_RUN: ${{ github.event.inputs.dry_run }}
+          SMOKE_TEST: ${{ github.event.inputs.smoke_test }}
           SINGLE_FEED: ${{ github.event.inputs.single_feed }}
           # OpenAI
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -107,14 +116,14 @@ jobs:
             ARGS+=(--single-feed "$SINGLE_FEED")
           fi
           
-          if [ "$DRY_RUN" = "true" ]; then
+          if [ "$SMOKE_TEST" = "true" ]; then
             python scripts/smoke_rss.py
           else
             python -m rss_to_wp run "${ARGS[@]}"
           fi
 
       - name: Save database to cache
-        if: ${{ always() && hashFiles('data/processed.db') != '' && github.event.inputs.dry_run != 'true' }}
+        if: ${{ always() && hashFiles('data/processed.db') != '' && github.event.inputs.dry_run != 'true' && github.event.inputs.smoke_test != 'true' }}
         uses: actions/cache/save@v4
         with:
           path: data/processed.db

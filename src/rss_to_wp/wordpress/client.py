@@ -107,7 +107,7 @@ class WordPressClient:
             source_url: Original article source URL.
 
         Returns:
-            True if exists, False otherwise.
+            The matching post, or None. Raises if the lookup fails.
         """
         if not source_url:
             return None

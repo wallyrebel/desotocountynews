@@ -122,7 +122,10 @@ class GroundedRewriter(OpenAIRewriter):
                 "or rss_title. Include every useful supported detail, keeping qualifications. "
                 "Evidence must be copied exactly, not paraphrased. A short factual notice is "
                 "publishable. Mark publishable=false only for empty/unavailable material, "
-                "greetings, pure engagement bait or material with no concrete news facts.",
+                "greetings, pure engagement bait or material with no concrete news facts. "
+                "The subject/action must be identifiable from the feed. If it only says "
+                "'this will be moved' without identifying what 'this' is, mark "
+                "publishable=false. Do not assume an event, meeting, person or activity.",
                 original,
             )
             if not extracted.publishable or not extracted.evidence:
