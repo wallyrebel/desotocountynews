@@ -10,7 +10,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Batesville Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhUAy4821K7.rss"
@@ -18,7 +18,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "City of Southaven"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhD0bCMwAMs.rss"
@@ -26,7 +26,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Southaven Chamber of Commerce"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCxD2CK9GF.rss"
@@ -34,7 +34,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Northwest Mississippi Community College"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCvFAPq3EK.rss"
@@ -42,7 +42,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Olive Branch Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCtnBN10Z8.rss"
@@ -50,7 +50,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "DeSoto Family Theatre"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCsg77bAmw.rss"
@@ -58,7 +58,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Southaven Fire Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCrnFg5EPi.rss"
@@ -66,7 +66,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Hernando Main Street Chamber of Commerce"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCql2CK9GE.rss"
@@ -74,7 +74,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Hernando Parks"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCpw79HF3y.rss"
@@ -82,7 +82,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Horn Lake Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCnzALf57y.rss"
@@ -90,7 +90,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "City of Olive Branch"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCmJ0IyGJO.rss"
@@ -98,7 +98,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   - name: "Olive Branch Parks and Recreation"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhClV2mSEJm.rss"
@@ -106,7 +106,7 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5
 
   # =============================================================================
   # Mississippi Statewide Source (CC BY-ND 4.0 Republishing)
@@ -118,7 +118,7 @@ feeds:
     default_tags:
       - "Mississippi"
       - "Statewide"
-    max_per_run: 3
+    max_per_run: 5
     republish: true
     use_original_title: true
 
@@ -128,4 +128,4 @@ feeds:
     default_tags:
       - "DeSoto County"
       - "Local"
-    max_per_run: 3
+    max_per_run: 5

@@ -18,7 +18,7 @@ class FeedConfig(BaseModel):
     url: str
     default_category: Optional[str] = None
     default_tags: list[str] = Field(default_factory=list)
-    max_per_run: int = Field(default=3, ge=1)
+    max_per_run: int = Field(default=5, ge=1)
     use_original_title: bool = False
     republish: bool = False
 

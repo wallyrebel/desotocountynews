@@ -61,10 +61,10 @@ python -m rss_to_wp status
 
 ## Backlog handling
 
-Each feed publishes up to `max_per_run` successful articles per run. Eligible
+Each feed publishes up to `max_per_run` successful articles per run (currently 5). Eligible
 entries are processed oldest first. Duplicates, low-information entries, and
 temporary failures do not consume posting slots. Seven eligible articles drain
-over three runs: 3, 3, then 1. Failed entries can be retried on the next run.
+over two runs: 5, then 2. Failed entries can be retried on the next run.
 Dry runs do not mark entries processed.
 
 The existing 48-hour freshness window and daily category limits still apply.
