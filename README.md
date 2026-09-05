@@ -5,11 +5,11 @@ Automated RSS feed monitoring, AI-powered article rewriting, and WordPress publi
 ## Features
 
 - **RSS Feed Monitoring**: Parse RSS/Atom feeds with robust error handling
-- **AI Rewriting**: Convert feed content to AP-style news using GPT-5 mini with GPT-4.1 nano fallback
-- **Smart Deduplication**: SQLite-based tracking ensures no duplicate posts
+- **AI Rewriting**: Extract exact RSS evidence, write with Luna, and check source support before publishing
+- **Deduplication**: SQLite tracking plus WordPress source-URL reconciliation
 - **Image Handling**: 
   - Extract images from RSS (media:content, enclosures, HTML)
-  - Fallback to Pexels/Unsplash for stock photos
+  - Neutral branded featured graphic when a source image is unavailable
   - Proper attribution in alt text
 - **WordPress Publishing**: Full REST API integration with categories and tags
 - **Quality Guardrails**: Skips low-information or placeholder feed entries
@@ -123,3 +123,24 @@ The workflow runs every 15 minutes automatically. Add your secrets in **Settings
 ## License
 
 MIT License
+
+## RSS-only editorial pipeline
+
+Normal RSS stories use separate structured Luna calls for extraction, writing,
+and source-support checking. Extraction quotes must match the RSS title/body
+verbatim. Writing receives only those quotes and source metadata, with no web tools.
+One revision is allowed for unsupported claims. Failed checks retry on a later run;
+no unsupported article or draft is created. The soft body target is 150 words:
+short factual briefs are allowed, and padding is forbidden.
+
+Every new post requires an uploaded featured image, a category and at least one
+tag. Use the RSS image when available; otherwise create a neutral DeSoto County
+News graphic. Missing metadata blocks publication until a later retry. Posts are
+explicitly published. Mississippi Today retains its original-text republish route.
+
+Source text, evidence, passages, model IDs and the support verdict are stored in
+SQLite article_audits with successful processing. A model check is not a guarantee:
+it checks support in the feed, not external truth. Source corrections still need
+reconciliation. Schedules remain every 15 minutes with up to three successful posts
+per feed per run, subject to available feed content, the 48-hour window and daily
+category caps. Actions uses Luna for extraction/writing and a 150-word soft target.

@@ -4,7 +4,7 @@
 
 feeds:
   # --- DeSoto County Local Feeds ---
-  - name: "DeSoto County Feed 1"
+  - name: "Panola County Sheriff’s Office"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhUCBEOX3Ry.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -12,7 +12,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 2"
+  - name: "Batesville Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhUAy4821K7.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -20,7 +20,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 3"
+  - name: "City of Southaven"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhD0bCMwAMs.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -28,7 +28,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 4"
+  - name: "Southaven Chamber of Commerce"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCxD2CK9GF.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -36,7 +36,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 5"
+  - name: "Northwest Mississippi Community College"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCvFAPq3EK.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -44,7 +44,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 6"
+  - name: "Olive Branch Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCtnBN10Z8.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -52,7 +52,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 7"
+  - name: "DeSoto Family Theatre"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCsg77bAmw.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -60,7 +60,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 8"
+  - name: "Southaven Fire Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCrnFg5EPi.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -68,7 +68,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 9"
+  - name: "Hernando Main Street Chamber of Commerce"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCql2CK9GE.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -76,7 +76,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 10"
+  - name: "Hernando Parks"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCpw79HF3y.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -84,7 +84,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 11"
+  - name: "Horn Lake Police Department"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCnzALf57y.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -92,7 +92,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 12"
+  - name: "City of Olive Branch"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhCmJ0IyGJO.rss"
     default_category: "DeSoto County News"
     default_tags:
@@ -100,7 +100,7 @@ feeds:
       - "Local"
     max_per_run: 3
 
-  - name: "DeSoto County Feed 13"
+  - name: "Olive Branch Parks and Recreation"
     url: "https://fetchrss.com/feed/1vcaujD2G3c21vhClV2mSEJm.rss"
     default_category: "DeSoto County News"
     default_tags:

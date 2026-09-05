@@ -98,7 +98,7 @@ class WordPressClient:
             logger.warning("duplicate_check_error", slug=slug, error=str(e))
             return False  # Assume no duplicate on error
 
-    def check_duplicate_by_source_url(self, source_url: str) -> bool:
+    def find_post_by_source_url(self, source_url: str) -> Optional[dict]:
         """Check if a post containing this source URL already exists.
 
         This is the most reliable duplicate check since the source URL never changes.
@@ -110,7 +110,7 @@ class WordPressClient:
             True if exists, False otherwise.
         """
         if not source_url:
-            return False
+            return None
 
         self._rate_limit()
 
@@ -121,7 +121,7 @@ class WordPressClient:
                 params={
                     "search": source_url,
                     "status": "any",
-                    "per_page": 5,
+                    "per_page": 100,
                 },
                 timeout=(10, 30),
             )
@@ -138,13 +138,13 @@ class WordPressClient:
                         post_id=post.get("id"),
                         post_title=post.get("title", {}).get("rendered", "")[:50],
                     )
-                    return True
+                    return post
 
-            return False
+            return None
 
         except Exception as e:
             logger.warning("source_url_check_error", source_url=source_url[:60], error=str(e))
-            return False  # Assume no duplicate on error
+            raise RuntimeError("Cannot verify WordPress duplicate status") from e
 
     def get_or_create_category(self, name: str) -> Optional[int]:
         """Get category ID, creating it if it doesn't exist.
@@ -335,15 +335,16 @@ class WordPressClient:
         Returns:
             Created post data or None.
         """
-        # PRIMARY CHECK: Check for duplicate by source URL (most reliable - URL never changes)
-        if source_url and self.check_duplicate_by_source_url(source_url):
-            logger.warning(
-                "skipping_duplicate_post_by_source",
-                title=title[:50],
-                source_url=source_url[:60],
-            )
-            return None  # Return None to indicate skip
-        
+        if not category_id or not tag_ids or not featured_media_id:
+            logger.error("required_post_metadata_missing", title=title[:50])
+            return None
+
+        if source_url:
+            existing = self.find_post_by_source_url(source_url)
+            if existing:
+                existing["_status"] = "already_published"
+                return existing
+
         self._rate_limit()
 
         # Add source attribution to content

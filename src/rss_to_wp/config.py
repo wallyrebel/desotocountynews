@@ -18,7 +18,7 @@ class FeedConfig(BaseModel):
     url: str
     default_category: Optional[str] = None
     default_tags: list[str] = Field(default_factory=list)
-    max_per_run: int = 5
+    max_per_run: int = Field(default=3, ge=1)
     use_original_title: bool = False
     republish: bool = False
 
@@ -100,7 +100,9 @@ class AppSettings(BaseSettings):
 
     # OpenAI
     openai_api_key: str = Field(..., description="OpenAI API key")
-    openai_model: str = Field(default="gpt-5-mini", description="Primary OpenAI model")
+    openai_model: str = Field(default="gpt-5.6-luna", description="RSS writing model")
+    openai_extraction_model: str = "gpt-5.6-luna"
+    article_target_min_words: int = Field(default=150, ge=0, le=1000)
     openai_fallback_model: str = Field(
         default="gpt-4.1-nano",
         description="Fallback OpenAI model",

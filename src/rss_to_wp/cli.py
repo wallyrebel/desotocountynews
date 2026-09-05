@@ -30,6 +30,9 @@ from rss_to_wp.feeds import (
 )
 from rss_to_wp.images import PexelsClient, download_image, find_fallback_image, find_rss_image
 from rss_to_wp.rewriter import OpenAIRewriter
+from rss_to_wp.rewriter.grounded import GroundedRewriter
+from rss_to_wp.images.brand import create_brand_image
+from rss_to_wp.feeds.filter import parse_entry_date
 from rss_to_wp.republish import build_republish_body, get_entry_author
 from rss_to_wp.storage import DedupeStore
 from rss_to_wp.utils import (
@@ -95,18 +98,6 @@ def _has_sufficient_story_content(content: str) -> tuple[bool, str]:
     lower = text.lower()
     if any(marker in lower for marker in LOW_INFORMATION_MARKERS):
         return (False, "placeholder_or_unavailable_content")
-
-    words = [word for word in text.split() if word]
-    if len(words) < 35:
-        return (False, "too_few_words")
-
-    meaningful_sentences = [
-        sentence.strip()
-        for sentence in re.split(r"[.!?]+", text)
-        if len(sentence.strip().split()) >= 8
-    ]
-    if len(words) < 80 and len(meaningful_sentences) < 2:
-        return (False, "too_few_meaningful_sentences")
 
     return (True, "ok")
 
@@ -432,10 +423,11 @@ def run(
         day_end_utc=day_end_utc,
     )
 
-    rewriter = OpenAIRewriter(
+    rewriter = GroundedRewriter(
         api_key=settings.openai_api_key,
         model=settings.openai_model,
-        fallback_model=settings.openai_fallback_model,
+        extraction_model=settings.openai_extraction_model,
+        target_min_words=settings.article_target_min_words,
     )
 
     wp_client = None
@@ -525,7 +517,7 @@ def run(
                 processed_articles=published_articles,
                 skipped_count=total_skipped,
                 error_count=total_errors,
-                site_name="TippahNews",
+                site_name="DeSoto County News",
             )
             send_email_notification(
                 smtp_email=settings.smtp_email,
@@ -656,6 +648,17 @@ def process_feed(
                 skipped += 1
                 continue
 
+            if status == "already_published":
+                if not dry_run:
+                    dedupe_store.mark_processed(
+                        entry_key=entry_key, feed_url=feed_config.url,
+                        entry_title=get_entry_title(entry), entry_link=get_entry_link(entry) or "",
+                        wp_post_id=result.get("id"), wp_post_url=result.get("link"),
+                        audit=result.get("_audit"),
+                    )
+                skipped += 1
+                continue
+
             if status != "published":
                 errors += 1
                 continue
@@ -670,6 +673,7 @@ def process_feed(
                     category=feed_category or None,
                     wp_post_id=result.get("id"),
                     wp_post_url=result.get("link"),
+                    audit=result.get("_audit"),
                 )
                 if feed_category in category_limits:
                     category_counts[feed_category] = category_counts.get(feed_category, 0) + 1
@@ -754,18 +758,24 @@ def process_entry(
             content=content,
             original_title=title,
             use_original_title=feed_config.use_original_title,
+            source_name=feed_config.name,
+            source_url=link or "",
+            published_at=str(parse_entry_date(entry) or ""),
         )
 
         if not rewritten:
             logger.error("rewrite_failed", title=title[:50])
             return None
 
+    if rewritten.get("_status") == "skipped":
+        return rewritten
+
     # Find image
     featured_media_id = None
     image_result = None
 
     if feed_config.republish:
-        # Photos are excluded from CC license; skip RSS images, use stock
+        # Keep the original-text republish pathway; use a neutral publisher graphic.
         image_url = None
         image_alt = ""
     else:
@@ -778,29 +788,15 @@ def process_entry(
             image_result = download_image(image_url)
             if image_result:
                 image_bytes, filename, _ = image_result
-                image_alt = title[:100]  # Use title as alt for RSS images
+                image_alt = f"Image supplied with the {feed_config.name} RSS post"
             else:
                 image_url = None
 
-    # Fallback to stock photos
-    if not image_url:
-        fallback = find_fallback_image(
-            title=title,
-            feed_name=feed_config.name,
-            pexels_key=settings.pexels_api_key,
-            unsplash_key=settings.unsplash_access_key,
-        )
-        if fallback:
-            logger.info("using_fallback_image", source=fallback["source"])
-            image_result = download_image(fallback["url"])
-            if image_result:
-                image_bytes, filename, _ = image_result
-                image_alt = fallback["alt_text"]
-            else:
-                fallback = None
-
-        if not fallback:
-            logger.warning("no_image_available", title=title[:50])
+    # A neutral publisher graphic avoids implying an unrelated stock photo is the event.
+    if not image_result:
+        image_result = create_brand_image()
+        image_bytes, filename, _ = image_result
+        image_alt = "DeSoto County News publisher graphic; not an event photograph"
 
     # Upload image to WordPress
     if not dry_run and wp_client and image_result:
@@ -810,15 +806,17 @@ def process_entry(
             alt_text=image_alt,
         )
 
-    # Get/create category
+    # Required metadata always has configured defaults.
+    category_name = feed_config.default_category or "DeSoto County News"
+    tag_names = feed_config.default_tags or [feed_config.name]
     category_id = None
-    if not dry_run and wp_client and feed_config.default_category:
-        category_id = wp_client.get_or_create_category(feed_config.default_category)
+    if not dry_run and wp_client:
+        category_id = wp_client.get_or_create_category(category_name)
 
     # Get/create tags
     tag_ids = []
-    if not dry_run and wp_client and feed_config.default_tags:
-        tag_ids = wp_client.get_or_create_tags(feed_config.default_tags)
+    if not dry_run and wp_client:
+        tag_ids = wp_client.get_or_create_tags(tag_names)
 
     # Create post
     if dry_run:
@@ -827,8 +825,8 @@ def process_entry(
             headline=rewritten["headline"][:50],
             body_length=len(rewritten["body"]),
             has_image=featured_media_id is not None or image_result is not None,
-            category=feed_config.default_category,
-            tags=feed_config.default_tags,
+            category=category_name,
+            tags=tag_names,
         )
         return {
             "_status": "published",
@@ -837,6 +835,9 @@ def process_entry(
         }
 
     if not wp_client:
+        return None
+    if not featured_media_id or not category_id or not tag_ids:
+        logger.error("required_post_metadata_failed", source_url=link)
         return None
 
     post = wp_client.create_post(
@@ -847,12 +848,14 @@ def process_entry(
         tag_ids=tag_ids,
         featured_media_id=featured_media_id,
         source_url=link,
+        status="publish",
     )
 
     if not post:
         return None
 
-    post["_status"] = "published"
+    post.setdefault("_status", "published")
+    post["_audit"] = rewritten.get("_audit")
     return post
 
 

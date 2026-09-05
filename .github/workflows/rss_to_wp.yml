@@ -71,14 +71,16 @@ jobs:
           SINGLE_FEED: ${{ github.event.inputs.single_feed }}
           # OpenAI
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-5-mini' }}
+          OPENAI_MODEL: gpt-5.6-luna
+          OPENAI_EXTRACTION_MODEL: gpt-5.6-luna
+          ARTICLE_TARGET_MIN_WORDS: '150'
           OPENAI_FALLBACK_MODEL: ${{ secrets.OPENAI_FALLBACK_MODEL || 'gpt-4.1-nano' }}
           
           # WordPress
           WORDPRESS_BASE_URL: ${{ secrets.WORDPRESS_BASE_URL }}
           WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
           WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
-          WORDPRESS_POST_STATUS: ${{ secrets.WORDPRESS_POST_STATUS || 'publish' }}
+          WORDPRESS_POST_STATUS: publish
           
           # Image providers (optional)
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
@@ -86,7 +88,7 @@ jobs:
           
           # Logging
           LOG_LEVEL: ${{ secrets.LOG_LEVEL || 'INFO' }}
-          TIMEZONE: ${{ secrets.TIMEZONE || 'UTC' }}
+          TIMEZONE: ${{ secrets.TIMEZONE || 'America/Chicago' }}
           
           # Email notifications (optional)
           SMTP_EMAIL: ${{ secrets.SMTP_EMAIL }}
@@ -105,7 +107,11 @@ jobs:
             ARGS+=(--single-feed "$SINGLE_FEED")
           fi
           
-          python -m rss_to_wp run "${ARGS[@]}"
+          if [ "$DRY_RUN" = "true" ]; then
+            python scripts/smoke_rss.py
+          else
+            python -m rss_to_wp run "${ARGS[@]}"
+          fi
 
       - name: Save database to cache
         if: ${{ always() && hashFiles('data/processed.db') != '' && github.event.inputs.dry_run != 'true' }}

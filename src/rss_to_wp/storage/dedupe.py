@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+import json
 from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
@@ -68,6 +69,9 @@ class DedupeStore:
                 ON processed_entries(category, processed_at)
             """)
 
+            conn.execute("""CREATE TABLE IF NOT EXISTS article_audits (
+                entry_key TEXT PRIMARY KEY, audit_json TEXT NOT NULL
+            )""")
             conn.commit()
 
         logger.debug("database_initialized", path=str(self.db_path))
@@ -112,6 +116,7 @@ class DedupeStore:
         category: Optional[str] = None,
         wp_post_id: Optional[int] = None,
         wp_post_url: Optional[str] = None,
+        audit: Optional[dict] = None,
     ) -> None:
         """Mark an entry as processed.
 
@@ -142,6 +147,9 @@ class DedupeStore:
                     datetime.utcnow().isoformat(),
                 ),
             )
+            if audit:
+                conn.execute("INSERT OR REPLACE INTO article_audits VALUES (?, ?)",
+                             (entry_key, json.dumps(audit, ensure_ascii=False)))
             conn.commit()
 
         logger.info(
