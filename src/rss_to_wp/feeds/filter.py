@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import hashlib
+from calendar import timegm
 from datetime import datetime
-from time import mktime, struct_time
+from time import struct_time
 from typing import Any, Optional
 
 import pendulum
@@ -35,7 +36,8 @@ def parse_entry_date(entry: dict[str, Any]) -> Optional[datetime]:
         if field in entry and entry[field]:
             try:
                 time_struct: struct_time = entry[field]
-                timestamp = mktime(time_struct)
+                # Feedparser's parsed timestamps are UTC, not host-local time.
+                timestamp = timegm(time_struct)
                 return datetime.fromtimestamp(timestamp, tz=pendulum.UTC)
             except (TypeError, ValueError, OverflowError):
                 continue

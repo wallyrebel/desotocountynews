@@ -22,6 +22,11 @@ on:
         default: ''
         type: string
 
+# Serialize publishers so two runs cannot publish from the same stale database.
+concurrency:
+  group: rss-to-wordpress-publisher
+  cancel-in-progress: false
+
 env:
   PYTHON_VERSION: '3.11'
 
@@ -44,6 +49,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e .
+          pip install pytest
+
+      - name: Test backlog handling before publishing
+        run: python -m pytest tests -q
 
       - name: Create data directory
         run: mkdir -p data
@@ -52,12 +61,14 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: data/processed.db
-          key: processed-db-${{ github.run_id }}
+          key: processed-db-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             processed-db-
 
       - name: Run RSS to WordPress
         env:
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+          SINGLE_FEED: ${{ github.event.inputs.single_feed }}
           # OpenAI
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-5-mini' }}
@@ -82,33 +93,37 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
         run: |
-          ARGS="--config feeds.yaml"
+          ARGS=(--config feeds.yaml)
           
           # Add dry-run flag if specified
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            ARGS="$ARGS --dry-run"
+          if [ "$DRY_RUN" = "true" ]; then
+            ARGS+=(--dry-run)
           fi
           
           # Add single-feed flag if specified
-          if [ -n "${{ github.event.inputs.single_feed }}" ]; then
-            ARGS="$ARGS --single-feed '${{ github.event.inputs.single_feed }}'"
+          if [ -n "$SINGLE_FEED" ]; then
+            ARGS+=(--single-feed "$SINGLE_FEED")
           fi
           
-          python -m rss_to_wp run $ARGS
+          python -m rss_to_wp run "${ARGS[@]}"
 
       - name: Save database to cache
+        if: ${{ always() && hashFiles('data/processed.db') != '' && github.event.inputs.dry_run != 'true' }}
         uses: actions/cache/save@v4
         with:
           path: data/processed.db
-          key: processed-db-${{ github.run_id }}
+          key: processed-db-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Summary
         if: always()
+        env:
+          SUMMARY_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          SUMMARY_SINGLE_FEED: ${{ github.event.inputs.single_feed || 'All feeds' }}
         run: |
           echo "## RSS to WordPress Run Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Dry Run**: ${{ github.event.inputs.dry_run || 'false' }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Single Feed**: ${{ github.event.inputs.single_feed || 'All feeds' }}" >> $GITHUB_STEP_SUMMARY
+          printf '%s\n' "- **Dry Run**: $SUMMARY_DRY_RUN" >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n' "- **Single Feed**: $SUMMARY_SINGLE_FEED" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> $GITHUB_STEP_SUMMARY
           
           if [ -f data/processed.db ]; then

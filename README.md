@@ -59,9 +59,26 @@ python -m rss_to_wp run --config feeds.yaml --dry-run
 python -m rss_to_wp status
 ```
 
+## Backlog handling
+
+Each feed publishes up to `max_per_run` successful articles per run. Eligible
+entries are processed oldest first. Duplicates, low-information entries, and
+temporary failures do not consume posting slots. Seven eligible articles drain
+over three runs: 3, 3, then 1. Failed entries can be retried on the next run.
+Dry runs do not mark entries processed.
+
+The existing 48-hour freshness window and daily category limits still apply.
+An article must still appear in its RSS feed and have a valid date and link.
+There is no durable article queue; expired or removed entries cannot be recovered
+automatically. GitHub Actions serializes publishers and saves posting history
+after failed runs. Cache eviction or a crash between publishing to WordPress and
+recording success can still require reconciliation.
+
+Run regression tests with `python -m pytest tests` after installing `.[dev]`.
+
 ## Feed Sources
 
-- **13 DeSoto County local feeds** via FetchRSS
+- **14 local and regional feeds** via FetchRSS, including Southaven Police Department
 - **Mississippi Today** for statewide Mississippi news
 
 ## GitHub Actions

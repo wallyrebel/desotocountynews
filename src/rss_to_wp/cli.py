@@ -573,13 +573,14 @@ def process_feed(
         logger.warning("feed_empty_or_failed", name=feed_config.name)
         return (0, 0, 1)
 
-    # Filter entries
+    # Scan every eligible entry; only successful posts consume the run limit.
+    # Oldest first prevents a busy feed from starving its existing backlog.
     entries = pick_entries(
         entries=feed.entries,
-        max_count=feed_config.max_per_run,
+        max_count=len(feed.entries),
         hours_window=hours,
         timezone=settings.timezone,
-    )
+    )[::-1]
 
     if not entries:
         logger.info("no_valid_entries", name=feed_config.name)
@@ -589,7 +590,11 @@ def process_feed(
 
     feed_category = feed_config.default_category or ""
 
+    seen_keys: set[str] = set()
     for entry_idx, entry in enumerate(entries):
+        if processed >= feed_config.max_per_run:
+            logger.info("feed_run_limit_reached", name=feed_config.name, processed=processed)
+            break
         if not dry_run and feed_category in category_limits:
             category_limit = category_limits[feed_category]
             current_count = category_counts.get(feed_category, 0)
@@ -609,7 +614,7 @@ def process_feed(
             entry_key = generate_entry_key(entry, feed_config.url)
 
             # Check if already processed
-            if dedupe_store.is_processed(entry_key):
+            if entry_key in seen_keys or dedupe_store.is_processed(entry_key):
                 logger.info(
                     "entry_skipped_duplicate",
                     key=entry_key,
@@ -617,6 +622,9 @@ def process_feed(
                 )
                 skipped += 1
                 continue
+
+            # Attempt each distinct entry once, including in dry runs and on errors.
+            seen_keys.add(entry_key)
 
             # Process entry
             result = process_entry(
