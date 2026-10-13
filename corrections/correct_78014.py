@@ -27,6 +27,22 @@ if __name__ == '__main__':
         except ValueError:
             print('Preflight failed:', error.code, 'non-JSON response',
                   'Cloudflare' if b'cloudflare' in body.lower() else 'server denial')
+        # Read-only diagnosis; report capability booleans, never account names or credentials.
+        diagnostic = urllib.request.Request(BASE + '/wp-json/wp/v2/users/me?context=edit',
+                                             headers=dict(request.header_items()))
+        try:
+            with urllib.request.urlopen(diagnostic, timeout=40) as response:
+                user = json.load(response)
+            capabilities = user.get('capabilities', {})
+            print('ACCOUNT_CAPABILITIES=' + json.dumps({
+                'authenticated': bool(user.get('id')),
+                'roles': user.get('roles', []),
+                'edit_posts': capabilities.get('edit_posts'),
+                'edit_others_posts': capabilities.get('edit_others_posts'),
+                'edit_published_posts': capabilities.get('edit_published_posts'),
+            }))
+        except urllib.error.HTTPError as diagnostic_error:
+            print('Account capability read failed:', diagnostic_error.code)
         raise SystemExit(1)
     if post['id'] != 78014 or post['status'] != 'publish':
         raise SystemExit('Unexpected post identity/status')
