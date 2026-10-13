@@ -1,0 +1,26 @@
+{
+  "post_id": 78014,
+  "url": "https://desotocountynews.com/desoto-county-news/lewisburg-rallies-from-0-2-down-to-win-north-half-volleyball-title/",
+  "status": "publish",
+  "source": "https://www.misshsaa.com/2026/10/08/2026-mhsaa-volleyball-championships/",
+  "body_replacement": {
+    "old": "<p>Next up is the biggest match of the year. The Patriots travel to Ocean Springs on Thursday, October 15 for the state championship against the Greyhounds, who come in at 32-8 after a 3-2 win over Brandon.</p>",
+    "new": "<p>Next up is the biggest match of the year. The Patriots face Ocean Springs in the Class 7A state championship at 6 p.m. Thursday, October 15 at Mississippi College’s A.E. Wood Coliseum in Clinton. The Greyhounds come in at 32-8 after a 3-2 win over Brandon.</p>"
+  },
+  "append_correction_note": "<p><em>Correction: An earlier version of this story incorrectly listed Ocean Springs as the championship venue. The match is at Mississippi College’s A.E. Wood Coliseum in Clinton; Ocean Springs is Lewisburg’s opponent.</em></p>",
+  "excerpt_replacement": {
+    "old": "The Lewisburg Patriots rallied from two sets down to win the North Half volleyball championship, and now head to Ocean Springs on Thursday for the state title.",
+    "new": "The Lewisburg Patriots rallied from two sets down to win the North Half volleyball championship and will face Ocean Springs for the Class 7A state title at 6 p.m. Thursday, October 15 at Mississippi College’s A.E. Wood Coliseum in Clinton."
+  },
+  "preserve": [
+    "title",
+    "slug",
+    "status",
+    "media",
+    "all unrelated prose",
+    "all registered metadata"
+  ],
+  "seo_assessment": "Registered SEOPress text overrides are empty; public description/DC/Open Graph/Twitter descriptions inherit the excerpt. No metadata override needs changing.",
+  "public_rendered_content_sha256": "cfacc89a945c19eaf2df0511818328952bd537c4a240fa62905af790ea0a3137",
+  "authenticated_raw_preflight": "BLOCKED: HTTP 403 rest_forbidden_context; raw digest is not available. This proposal is not executable or authorized for mutation until authenticated preflight and parent review."
+}

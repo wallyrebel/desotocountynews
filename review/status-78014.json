@@ -1,0 +1,31 @@
+{
+  "post_id": 78014,
+  "publication_stage": "blocked at authenticated raw preflight; no WordPress mutations attempted",
+  "official_source_verified": "https://www.misshsaa.com/2026/10/08/2026-mhsaa-volleyball-championships/",
+  "official_facts": {
+    "class": "7A",
+    "date": "Thursday, October 15, 2026",
+    "time": "6 p.m.",
+    "venue": "Mississippi College, A.E. Wood Coliseum, Clinton"
+  },
+  "current_article_read": "Full public REST body and public HTML; no original source link in article. Official MHSAA original source page also read.",
+  "actions_run": "https://github.com/wallyrebel/desotocountynews/actions/runs/38420356127",
+  "preflight_error": {
+    "http_status": 403,
+    "code": "rest_forbidden_context",
+    "message": "Sorry, you are not allowed to edit this post."
+  },
+  "existing_account": {
+    "authenticated": true,
+    "roles": [
+      "author"
+    ],
+    "edit_posts": true,
+    "edit_published_posts": true,
+    "edit_others_posts": null
+  },
+  "blocker": "Existing managed Actions account cannot edit target post. No credentials retrieved/copied, no connector writes, no duplicate creation, no RSS dispatch or schedule changes.",
+  "implementation": "Read-only preflight branch correction/post-78014, same rss-to-wordpress-publisher concurrency lock. No mutation route enabled because required raw content digest is unavailable.",
+  "next_steps": "Parent review editorial proposal. Resolve target-post editing permission in existing managed route through site administrator before authenticated raw preflight, digest-bound implementation, offline tests, exact Actions dry-run, parent apply approval, public verification, and one-shot retirement. Do not treat public preview as exact raw dry-run.",
+  "later_items": "Hold 78006 pending user rights decision; verify AP agreement before 77986; other delegated fixes remain pending until Lewisburg verified."
+}

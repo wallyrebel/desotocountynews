@@ -1,0 +1,10 @@
+{
+  "result": "passed",
+  "checks": [
+    "exactly one body replacement",
+    "exact excerpt match",
+    "unchanged prefix containing all unrelated paragraphs",
+    "same inline image URL/count"
+  ],
+  "limitation": "Public rendered preview only; authenticated raw dry-run has not passed."
+}
