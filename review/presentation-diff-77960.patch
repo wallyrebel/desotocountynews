@@ -1,0 +1,75 @@
+--- public-77960
++++ proposed-77960
+@@ -1,6 +1,4 @@
+ <p><em>By <strong>Molly Minta</strong> | Originally published by <a href="https://mississippitoday.org" target="_blank" rel="noopener">Mississippi Today</a></em></p>
+-<div class="wp-block-custom-everlit-iframe-embed"></div>
+-<div class="everlit-disclaimer">Audio articles are automated for accessibility. Humans wrote and edited the story; however, this audio has not been reviewed for accuracy and may contain errors. <a href="https://mississippitoday.org/ai-policy">Read more</a> about how we use AI to increase access to our reporting.</div>
+ <div class="wp-block-group alignwide has-global-padding is-layout-constrained wp-block-group-is-layout-constrained">
+ <p class="wp-block-paragraph">Hinds County voters will go to the polls Nov. 3 to select their next district attorney in a quick-turn special election to fill out the term of former District Attorney Jody Owens, who pleaded guilty over the summer to a federal bribery charge stemming from an FBI sting operation to uncover corruption in Mississippi’s capital city. </p>
+ <p class="wp-block-paragraph">Mississippi Today invited candidates to answer questions about their qualifications and priorities. Their responses have been lightly edited for clarity and length. </p>
+@@ -13,7 +11,7 @@
+ <div class="wp-block-group is-vertical is-layout-flex wp-container-core-group-is-layout-29222782 wp-block-group-is-layout-flex">
+ <div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-483a8f50 wp-block-columns-is-layout-flex">
+ <div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow">
+-<figure class="wp-block-image size-full is-style-rounded"><figcaption><span class="image-credit"><span class="credit-label-wrapper">Credit:</span> Photo courtesy Gwen Agho</span></figcaption></figure>
++
+ </div>
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+ <h3 class="wp-block-heading">Gwen Agho</h3>
+@@ -22,7 +20,7 @@
+ </div>
+ <div class="wp-block-columns are-vertically-aligned-center is-layout-flex wp-container-core-columns-is-layout-483a8f50 wp-block-columns-is-layout-flex">
+ <div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow">
+-<figure class="wp-block-image size-full is-style-rounded"><figcaption><span class="image-credit"><span class="credit-label-wrapper">Credit:</span> Photo courtesy Greta Mack Harris</span></figcaption></figure>
++
+ </div>
+ <div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow">
+ <h3 class="wp-block-heading">Greta Mack Harris</h3>
+@@ -31,7 +29,7 @@
+ </div>
+ <div class="wp-block-columns are-vertically-aligned-center is-layout-flex wp-container-core-columns-is-layout-483a8f50 wp-block-columns-is-layout-flex">
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+-<figure class="wp-block-image size-full is-style-rounded"><figcaption><span class="image-credit"><span class="credit-label-wrapper">Credit:</span> Photo courtesy Darla Palmer</span></figcaption></figure>
++
+ </div>
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+ <h3 class="wp-block-heading">Darla Palmer</h3>
+@@ -40,7 +38,7 @@
+ </div>
+ <div class="wp-block-columns are-vertically-aligned-center is-layout-flex wp-container-core-columns-is-layout-483a8f50 wp-block-columns-is-layout-flex">
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+-<figure class="wp-block-image size-full is-style-rounded"><figcaption><span class="image-credit"><span class="credit-label-wrapper">Credit:</span> Photo courtesy Marvin Sanders</span></figcaption></figure>
++
+ </div>
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+ <h3 class="wp-block-heading">Marvin Sanders</h3>
+@@ -49,7 +47,7 @@
+ </div>
+ <div class="wp-block-columns are-vertically-aligned-center is-layout-flex wp-container-core-columns-is-layout-483a8f50 wp-block-columns-is-layout-flex">
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+-<figure class="wp-block-image size-full is-style-rounded"><figcaption><span class="image-credit"><span class="credit-label-wrapper">Credit:</span> Photo courtesy Wendy Wilson White</span></figcaption></figure>
++
+ </div>
+ <div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+ <h3 class="wp-block-heading">Wendy Wilson White</h3>
+@@ -171,16 +169,16 @@
+ <div class="wp-block-dst-slideshow">
+ <ul class="wp-block-dst-slideshow_slides">
+ <li class="wp-block-dst-slideshow_slide">
+-<figure><figcaption class="wp-block-dst-slideshow_caption wp-element-caption">Campaign signs for Hinds County District Attorney candidates Greta Mack Harris, left, and Marvin Harris, located at the intersection of Jefferson and Pascagoula Streets, Wednesday, Oct. 7, 2026, in Jackson.</figcaption></figure>
++
+ </li>
+ <li class="wp-block-dst-slideshow_slide">
+-<figure><figcaption class="wp-block-dst-slideshow_caption wp-element-caption">Campaign sign for attorney Darla Palmer, located at the intersection of Northside Drive and California Avenue, Wednesday, Oct. 7, 2026, in Jackson. Palmer is running for Hinds County District Attorney along with four other candidates.</figcaption></figure>
++
+ </li>
+ <li class="wp-block-dst-slideshow_slide">
+-<figure><figcaption class="wp-block-dst-slideshow_caption wp-element-caption">Campaign signs for Hinds County District Attorney candidates Greta Mack Harris, left, and Wendy Wilson White, located at the intersection of Northside Drive and California Avenue, Wednesday, Oct. 7, 2026, in Jackson.</figcaption></figure>
++
+ </li>
+ <li class="wp-block-dst-slideshow_slide">
+-<figure><figcaption class="wp-block-dst-slideshow_caption wp-element-caption">Campaign sign for Hinds County District Attorney candidate Gwen Agho, located at the intersection of Jefferson and Pascagoula Streets, Wednesday, Oct. 7, 2026, in Jackson.</figcaption></figure>
++
+ </li>
+ </ul>
+ </div>

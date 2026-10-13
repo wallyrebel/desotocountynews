@@ -1,0 +1,128 @@
+{
+  "policy": "https://mississippitoday.org/republishing/",
+  "policy_review": "Most original stories with a Republish This Story export may be republished under CC BY-ND. Photos/graphics require specific permission; photo essays excluded. These proposals change presentation elements excluded from the verified exports and do not rewrite story prose.",
+  "proposals": [
+    {
+      "post_id": 77960,
+      "title": "Hinds district attorney election guide: Meet the candidates",
+      "url": "https://desotocountynews.com/mississippi-news/hinds-district-attorney-election-guide-meet-the-candidates/",
+      "source": "https://mississippitoday.org/2026/10/12/hinds-district-attorney-election-guide/",
+      "status": "read-only proposal; authenticated raw preflight and review required before any write",
+      "proposed_change": "Remove empty player placeholder, unavailable-audio disclaimer, and caption-only figures absent from publisher-provided republishing export. Preserve all current article paragraphs, byline, attribution, and license footer exactly.",
+      "caption_only_figures_removed": 9,
+      "featured_media_preserved": 77959,
+      "preserve_fields": [
+        "id",
+        "status",
+        "url",
+        "title",
+        "excerpt",
+        "meta",
+        "featured_media",
+        "categories",
+        "tags",
+        "author"
+      ],
+      "rendered_before_sha256": "6b32b1983057af3e86186ab38b320b8060271cd231179eb24eb129a827d6effa",
+      "rendered_after_sha256": "392b602bc7fd1277fefc58721af21a95fee034945e7e3d975a87753b4ffb1767",
+      "publisher_export_verified": {
+        "selector": "textarea#republication-tracker-tool-shareable-content",
+        "chars": 30592,
+        "license": "CC BY-ND 4.0",
+        "figcaptions": 0,
+        "audio_disclaimer": false,
+        "tracking_pixel_present": true
+      },
+      "offline_checks": "All existing paragraph HTML byte-for-byte equal; all attribution preserved; no source photos added. Public-rendered preview only, not raw mutation payload."
+    },
+    {
+      "post_id": 77988,
+      "title": "Canton water issue affects several local schools",
+      "url": "https://desotocountynews.com/mississippi-news/canton-water-issue-affects-several-local-schools/",
+      "source": "https://mississippitoday.org/2026/10/12/canton-water-problem-affects-several-local-schools/",
+      "status": "read-only proposal; authenticated raw preflight and review required before any write",
+      "proposed_change": "Remove empty player placeholder, unavailable-audio disclaimer, and caption-only figures absent from publisher-provided republishing export. Preserve all current article paragraphs, byline, attribution, and license footer exactly.",
+      "caption_only_figures_removed": 0,
+      "featured_media_preserved": 77987,
+      "preserve_fields": [
+        "id",
+        "status",
+        "url",
+        "title",
+        "excerpt",
+        "meta",
+        "featured_media",
+        "categories",
+        "tags",
+        "author"
+      ],
+      "rendered_before_sha256": "bfce9c31a2b6eec818becbd33d2d2925928f86a1bcb50d179652535b161ed790",
+      "rendered_after_sha256": "0abf259bc40028a7ba6bbca9d7bdc6d353ad072f71a3be1965e18d03bd594b09",
+      "publisher_export_verified": {
+        "selector": "textarea#republication-tracker-tool-shareable-content",
+        "chars": 2893,
+        "license": "CC BY-ND 4.0",
+        "figcaptions": 0,
+        "audio_disclaimer": false,
+        "tracking_pixel_present": true
+      },
+      "offline_checks": "All existing paragraph HTML byte-for-byte equal; all attribution preserved; no source photos added. Public-rendered preview only, not raw mutation payload."
+    },
+    {
+      "post_id": 78024,
+      "title": "Pete Buttigieg to campaign for Scott Colom in Mississippi",
+      "url": "https://desotocountynews.com/mississippi-news/pete-buttigieg-to-campaign-for-scott-colom-in-mississippi/",
+      "source": "https://mississippitoday.org/2026/10/13/pete-buttigieg-to-campaign-for-scott-colom-in-mississippi/",
+      "status": "read-only proposal; authenticated raw preflight and review required before any write",
+      "proposed_change": "Remove empty player placeholder, unavailable-audio disclaimer, and caption-only figures absent from publisher-provided republishing export. Preserve all current article paragraphs, byline, attribution, and license footer exactly.",
+      "caption_only_figures_removed": 0,
+      "featured_media_preserved": 78023,
+      "preserve_fields": [
+        "id",
+        "status",
+        "url",
+        "title",
+        "excerpt",
+        "meta",
+        "featured_media",
+        "categories",
+        "tags",
+        "author"
+      ],
+      "rendered_before_sha256": "34d1b83c314d6fbd02ba4f7fdc68210e69579e6063c2eb2c6bd6e84d2f96f284",
+      "rendered_after_sha256": "42197e8d3cac1451e11131c301819797e88dd2cca98f8682536ea4fbe6eed47d",
+      "publisher_export_verified": {
+        "selector": "textarea#republication-tracker-tool-shareable-content",
+        "chars": 3539,
+        "license": "CC BY-ND 4.0",
+        "figcaptions": 0,
+        "audio_disclaimer": false,
+        "tracking_pixel_present": true
+      },
+      "offline_checks": "All existing paragraph HTML byte-for-byte equal; all attribution preserved; no source photos added. Public-rendered preview only, not raw mutation payload."
+    }
+  ],
+  "canonical_export_alternative": "Replacing the full body with each publisher-provided export is also available after capturing/pinning exact export bytes and reviewing formatting. Hinds export itself contains a duplicated qualifications heading/answer; do not silently rewrite or deduplicate that licensed text.",
+  "holds": {
+    "78006": "Awaiting user approval for original summary/link alternative. Preserve featured-media illustration. No inline photos may be copied under general policy.",
+    "77986": {
+      "title": "Many GOP states have imposed new voting rules this year, some mirroring Trump’s midterm proposals",
+      "url": "https://desotocountynews.com/mississippi-news/many-gop-states-have-imposed-new-voting-rules-this-year-some-mirroring-trumps-midterm-proposals/",
+      "source": "https://mississippitoday.org/2026/10/12/gop-states-voting-rules-trump-midterm/",
+      "rights": "Source byline Gary Fields and Julie Carr Smyth, Associated Press; no Republish button or export textarea. No explicit AP agreement found in repository README, docs, feed config, or republishing implementation. Preserve pending proof of agreement; generic imported CC footer is insufficient."
+    }
+  },
+  "workflow_safety": {
+    "identity_run": "https://github.com/wallyrebel/desotocountynews/actions/runs/38421012178",
+    "identity": {
+      "id": 4,
+      "display_name": "Peyton Taylor",
+      "role": "author",
+      "username": "GitHub masked; not retrieved through another route"
+    },
+    "correction_script": "GET users/me only; no mutation code",
+    "active_runs": [],
+    "queued_runs": [],
+    "schedule": "Original RSS schedule unchanged; its ordinary future runs still exist."
+  }
+}

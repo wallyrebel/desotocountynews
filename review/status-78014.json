@@ -22,10 +22,14 @@
     ],
     "edit_posts": true,
     "edit_published_posts": true,
-    "edit_others_posts": null
+    "edit_others_posts": null,
+    "id": 4,
+    "display_name": "Peyton Taylor",
+    "username": "Masked by GitHub Actions; no masking bypass attempted"
   },
   "blocker": "Existing managed Actions account cannot edit target post. No credentials retrieved/copied, no connector writes, no duplicate creation, no RSS dispatch or schedule changes.",
-  "implementation": "Read-only preflight branch correction/post-78014, same rss-to-wordpress-publisher concurrency lock. No mutation route enabled because required raw content digest is unavailable.",
-  "next_steps": "Parent review editorial proposal. Resolve target-post editing permission in existing managed route through site administrator before authenticated raw preflight, digest-bound implementation, offline tests, exact Actions dry-run, parent apply approval, public verification, and one-shot retirement. Do not treat public preview as exact raw dry-run.",
-  "later_items": "Hold 78006 pending user rights decision; verify AP agreement before 77986; other delegated fixes remain pending until Lewisburg verified."
+  "implementation": "Branch correction/post-78014 preserved. Latest script only sends GET users/me; no WordPress mutation code exists. Same serialized publisher lock. No active or queued repository runs at status check.",
+  "next_steps": "Hold all mutation work until site administrator resolves existing account permissions and parent approves continuation. Do not use another route/account or change permissions. Then complete raw preflight, bound implementation, offline tests, exact dry-run, parent review, publication, verification, and retirement.",
+  "later_items": "Hold 78006 pending user rights decision; verify AP agreement before 77986; other delegated fixes remain pending until Lewisburg verified.",
+  "identity_run": "https://github.com/wallyrebel/desotocountynews/actions/runs/38421012178"
 }
