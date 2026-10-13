@@ -1,0 +1,27 @@
+name: One-shot correction preflight 78014
+on:
+  push:
+    branches: [correction/post-78014]
+    paths:
+      - corrections/**
+      - .github/workflows/correction-78014.yml
+permissions:
+  contents: read
+concurrency:
+  group: rss-to-wordpress-publisher
+  cancel-in-progress: false
+jobs:
+  correction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Authenticated raw preflight (read only)
+        env:
+          WORDPRESS_BASE_URL: ${{ secrets.WORDPRESS_BASE_URL }}
+          WORDPRESS_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
+          WORDPRESS_APP_PASSWORD: ${{ secrets.WORDPRESS_APP_PASSWORD }}
+        run: python corrections/correct_78014.py
