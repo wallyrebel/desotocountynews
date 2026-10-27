@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from rss_to_wp.rewriter.model_options import chat_model_params, resolve_retired_model
+from rss_to_wp.rewriter.model_options import create_model_completion, resolve_retired_model
 
 import json
 import re
@@ -187,7 +187,7 @@ class OpenAIRewriter:
                     temperature=temperature,
                 )
 
-                response = self.client.chat.completions.create(**chat_model_params(api_params))
+                response = create_model_completion(self.client, api_params)
                 response_text = response.choices[0].message.content or ""
                 parsed = self._parse_response(response_text)
 
