@@ -104,7 +104,7 @@ class AppSettings(BaseSettings):
     openai_extraction_model: str = "gpt-5.6-luna"
     article_target_min_words: int = Field(default=150, ge=0, le=1000)
     openai_fallback_model: str = Field(
-        default="gpt-4.1-nano",
+        default="gpt-6-luna",
         description="Fallback OpenAI model",
     )
 
