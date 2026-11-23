@@ -120,9 +120,14 @@ class GroundedRewriter(OpenAIRewriter):
                 Extraction,
                 "Extract the concrete news facts as exact verbatim contiguous spans from rss_text "
                 "or rss_title. Include every useful supported detail, keeping qualifications. "
-                "Evidence must be copied exactly, not paraphrased. A short factual notice is "
-                "publishable. Mark publishable=false only for empty/unavailable material, "
-                "greetings, pure engagement bait or material with no concrete news facts. "
+                "Evidence must be copied exactly. Look for a reportable development or "
+                "specific information the public can use. Short notices about a closure, "
+                "public meeting, safety alert, service change or community fundraiser can qualify. "
+                "Skip ordinary product availability, menu or flavor promotions, sale pitches, "
+                "generic invitations, greetings and engagement posts whose only news is that "
+                "someone posted them. Business openings, closures and documented public impacts "
+                "can qualify. A sponsor, business or chamber repost is evaluated on the same facts. "
+                "Use publishable=false if the source lacks a concrete news item. "
                 "The subject/action must be identifiable from the feed. If it only says "
                 "'this will be moved' without identifying what 'this' is, mark "
                 "publishable=false. Do not assume an event, meeting, person or activity.",

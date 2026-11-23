@@ -10,6 +10,12 @@ settings = get_app_settings()
 writer = GroundedRewriter(settings.openai_api_key, model=settings.openai_model,
     extraction_model=settings.openai_extraction_model,
     target_min_words=settings.article_target_min_words)
+promotion = writer.rewrite("Our bagel shop has holiday cannoli cream cheese in stock. Come buy it today!",
+    "Flavor of the week", source_name="Local test bulletin")
+assert promotion and promotion.get("_status") == "skipped", "Product promotion accepted as news"
+closure = writer.rewrite("The city will close the Pine Street crossing Monday from 7 a.m. to noon for track repairs. Drivers can use Main Street during the closure.",
+    "Crossing closed Monday", source_name="Local test bulletin")
+assert closure and closure.get("_audit"), "Actionable public closure was held"
 results = []
 attempts = 0
 for config in load_feeds_config('feeds.yaml').feeds:
